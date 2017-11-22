@@ -1,0 +1,49 @@
+{
+  "name": "babel-imports",
+  "version": "0.0.1",
+  "description": "Helper for rewriting imports from a particular library.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/module/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "npm run build:cjs && npm run build:module",
+    "build:cjs": "tsc --outDir dist/cjs --module commonjs",
+    "build:module": "tsc --outDir dist/module --module esnext"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cameron-martin/babel-imports.git"
+  },
+  "author": "Cameron Martin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cameron-martin/babel-imports/issues"
+  },
+  "homepage": "https://github.com/cameron-martin/babel-imports#readme",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ]
+  },
+  "devDependencies": {
+    "@types/babel-traverse": "^6.25.2",
+    "@types/babylon": "^6.16.2",
+    "@types/jest": "^21.1.7",
+    "babel-traverse": "^6.26.0",
+    "babylon": "^6.18.0",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.2.3",
+    "typescript": "^2.6.1"
+  },
+  "dependencies": {
+    "babel-types": "^6.26.0"
+  }
+}
