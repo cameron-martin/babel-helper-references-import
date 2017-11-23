@@ -40,10 +40,23 @@ describe('destructuring', () => {
 
         assertNotReferences(code, 'bar', 'foo');
     });
+
+    // REVIEW: Should this actually throw?
+    test('binding not constant', () => {
+        const code = `
+            let { foo } = require('package');
+
+            foo = 1;
+
+            foo;
+        `;
+
+        assertNotReferences(code, 'package', 'foo');
+    });
 });
 
 describe('memberexpression at use site', () => {
-    test('correct with identifier property', () => {
+    test('identifier property', () => {
         const code = `
             const bar = require('package');
 
@@ -53,7 +66,7 @@ describe('memberexpression at use site', () => {
         assertReferences(code, 'package', 'importName');
     });
 
-    test('correct with string computed property', () => {
+    test('string computed property', () => {
         const code = `
             const bar = require('package');
 
@@ -63,7 +76,7 @@ describe('memberexpression at use site', () => {
         assertReferences(code, 'package', 'importName');
     });
 
-    test('incorrect when not a require', () => {
+    test('not a require', () => {
         const code = `
             const bar = 1;
 
@@ -73,7 +86,7 @@ describe('memberexpression at use site', () => {
         assertNotReferences(code, 'package', 'importName');
     });
 
-    test('incorrect when not requiring correct package', () => {
+    test('not requiring correct package', () => {
         const code = `
             const bar = require('other-package');
 
@@ -83,11 +96,24 @@ describe('memberexpression at use site', () => {
         assertNotReferences(code, 'package', 'importName');
     });
 
-    test('incorrect when wrong import name', () => {
+    test('wrong import name', () => {
         const code = `
             const bar = require('package');
 
             bar['otherImport'];
+        `;
+
+        assertNotReferences(code, 'package', 'importName');
+    });
+
+    // REVIEW: Should this actually throw?
+    test('binding not constant', () => {
+        const code = `
+            let bar = require('package');
+
+            bar = 1;
+
+            bar.importName;
         `;
 
         assertNotReferences(code, 'package', 'importName');

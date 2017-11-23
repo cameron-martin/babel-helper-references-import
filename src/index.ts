@@ -31,6 +31,7 @@ function isDestructuringRequire(path: NodePath, packageName: string, importName:
     const bindingIdentifier = path.scope.getBindingIdentifier(path.node.name);
 
     if(!binding || !binding.path.isVariableDeclarator()) return false;
+    if(!binding.constant) return false;
     if(!isRequire(binding.path.get('init'), packageName)) return false;
 
     const id = binding.path.get('id');
@@ -62,6 +63,7 @@ function isMemberExpressionRequire(path: NodePath, packageName: string, importNa
     const binding = path.scope.getBinding(object.node.name);
 
     if(!binding || !binding.path.isVariableDeclarator()) return false;
+    if(!binding.constant) return false;
 
     const id = binding.path.get('id');
 
