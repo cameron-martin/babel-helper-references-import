@@ -54,7 +54,7 @@ describe('named', () => {
     });
 });
 
-describe('namespace', () => {
+describe('namespace, memberexpression at use site', () => {
     test('non-computed identifier property', () => {
         const code = `
             import * as bar from 'bar';
@@ -93,5 +93,17 @@ describe('namespace', () => {
         `;
 
         assertNotReferences(code, 'bar', 'foo');
+    });
+});
+
+describe('namespace, when checking for namespace', () => {
+    test('correct case', () => {
+        const code = `
+            import * as foo from 'bar';
+
+            foo;
+        `;
+
+        assertReferences(code, 'bar', '*');
     });
 });

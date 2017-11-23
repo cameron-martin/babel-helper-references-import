@@ -2,20 +2,16 @@ import { NodePath } from 'babel-traverse';
 import * as t from 'babel-types';
 
 export function referencesImport(path: NodePath, packageName: string, importName: string): boolean {
-    if(isEs6Import(path, packageName, importName)) return true;
-    if(isDestructuringRequire(path, packageName, importName)) return true;
-    if(isMemberExpressionRequire(path, packageName, importName)) return true;
-
-    return false;
-}
-
-function isEs6Import(path: NodePath, packageName: string, importName: string) {
     // Most es6 imports
     if(path.referencesImport(packageName, importName)) return true;
 
     // import * as foo from 'bar'; foo.baz;
     // import * as foo from 'bar'; foo['baz'];
-    if(isStaticMemberExpression(path, importName) && path.get('object').referencesImport(packageName, '*')) return true;
+    // const package = require('package'); package.foo;
+    // const package = require('package'); package['foo'];
+    if(isStaticMemberExpression(path, importName) && referencesImport(path.get('object'), packageName, '*')) return true;
+    if(isDestructuringRequire(path, packageName, importName)) return true;
+    if(isCommonjsNamespaceImport(path, packageName, importName)) return true;
 
     return false;
 }
@@ -50,17 +46,14 @@ function isDestructuringRequire(path: NodePath, packageName: string, importName:
 }
 
 /**
- * const package = require('package'); package.foo;
- * const package = require('package'); package['foo'];
+ * const package = require('package'); package;
  */
-function isMemberExpressionRequire(path: NodePath, packageName: string, importName: string): boolean {
-    if(!isStaticMemberExpression(path, importName)) return false;
+function isCommonjsNamespaceImport(path: NodePath, packageName: string, importName: string): boolean {
+    if(importName !== '*') return false;
 
-    const object = path.get('object');
+    if(!path.isReferencedIdentifier()) return false;
 
-    if(!object.isReferencedIdentifier()) return false;
-
-    const binding = path.scope.getBinding(object.node.name);
+    const binding = path.scope.getBinding(path.node.name);
 
     if(!binding || !binding.path.isVariableDeclarator()) return false;
     if(!binding.constant) return false;

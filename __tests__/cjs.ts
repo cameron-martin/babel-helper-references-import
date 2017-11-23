@@ -119,3 +119,25 @@ describe('memberexpression at use site', () => {
         assertNotReferences(code, 'package', 'importName');
     });
 });
+
+describe('namespace import', () => {
+    test('correct', () => {
+        const code = `
+            const foo = require('package');
+
+            foo;
+        `;
+
+        assertReferences(code, 'package', '*');
+    });
+
+    test('actually a member expression', () => {
+        const code = `
+            const foo = require('package');
+
+            foo.foo;
+        `;
+
+        assertNotReferences(code, 'package', '*');
+    });
+});
