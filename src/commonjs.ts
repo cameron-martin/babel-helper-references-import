@@ -4,9 +4,7 @@ import * as t from 'babel-types';
 /**
  * const package = require('package'); package;
  */
-export function isCommonjsNamespaceImport(path: NodePath, packageName: string, importName: string): boolean {
-    if(importName !== '*') return false;
-
+export function isCommonjsNamespaceImport(path: NodePath, packageName: string): boolean {
     if(!path.isReferencedIdentifier()) return false;
 
     const binding = path.scope.getBinding(path.node.name);

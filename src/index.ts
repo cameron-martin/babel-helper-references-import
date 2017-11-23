@@ -11,8 +11,9 @@ export function referencesImport(path: NodePath, packageName: string, importName
     // const package = require('package'); package.foo;
     // const package = require('package'); package['foo'];
     if(isStaticMemberExpression(path, importName) && referencesImport(path.get('object'), packageName, '*')) return true;
+
     if(isDestructuringRequire(path, packageName, importName)) return true;
-    if(isCommonjsNamespaceImport(path, packageName, importName)) return true;
+    if(importName === '*' && isCommonjsNamespaceImport(path, packageName)) return true;
 
     return false;
 }
