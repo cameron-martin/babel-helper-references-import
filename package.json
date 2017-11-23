@@ -1,5 +1,5 @@
 {
-  "name": "babel-imports",
+  "name": "babel-helper-references-import",
   "version": "0.0.1",
   "description": "Helper for rewriting imports from a particular library.",
   "main": "dist/cjs/index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cameron-martin/babel-imports.git"
+    "url": "git+https://github.com/cameron-martin/babel-helper-references-import.git"
   },
   "author": "Cameron Martin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cameron-martin/babel-imports/issues"
+    "url": "https://github.com/cameron-martin/babel-helper-references-import/issues"
   },
-  "homepage": "https://github.com/cameron-martin/babel-imports#readme",
+  "homepage": "https://github.com/cameron-martin/babel-helper-references-import#readme",
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"

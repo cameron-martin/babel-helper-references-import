@@ -1,4 +1,4 @@
-# babel-imports
+# babel-helper-references-import
 
 Checks whether an `Identifier` or `MemberExpression` references a specific import from a specific package.
 
