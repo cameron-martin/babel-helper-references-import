@@ -25,3 +25,4 @@ This package contains a single named export:
 
 * Dynamic imports
 * Consider when errors should be thrown rather than just not matching.
+* Make the build not fail. This relies on [my PR](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/21680) being merged.
