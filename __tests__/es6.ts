@@ -5,7 +5,7 @@ describe('default import', () => {
         const code = `
             import foo from 'bar';
 
-            foo;
+            TARGET(foo);
         `;
 
         assertReferences(code, 'bar', 'default');
@@ -15,7 +15,7 @@ describe('default import', () => {
         const code = `
             import foo from 'bar';
 
-            baz;
+            TARGET(baz);
         `;
 
         assertNotReferences(code, 'bar', 'default');
@@ -25,7 +25,7 @@ describe('default import', () => {
         const code = `
             import foo from 'bar';
 
-            foo;
+            TARGET(foo);
         `;
 
         assertNotReferences(code, 'bar', 'foo');
@@ -37,7 +37,7 @@ describe('named', () => {
         const code = `
             import { foo } from 'bar';
 
-            foo;
+            TARGET(foo);
         `;
 
         assertReferences(code, 'bar', 'foo');
@@ -47,7 +47,7 @@ describe('named', () => {
         const code = `
             import { foo as baz } from 'bar';
 
-            baz;
+            TARGET(baz);
         `;
 
         assertReferences(code, 'bar', 'foo');
@@ -59,7 +59,7 @@ describe('namespace, memberexpression at use site', () => {
         const code = `
             import * as bar from 'bar';
 
-            bar.foo;
+            TARGET(bar.foo);
         `;
 
         assertReferences(code, 'bar', 'foo');
@@ -69,7 +69,7 @@ describe('namespace, memberexpression at use site', () => {
         const code = `
             import * as bar from 'bar';
 
-            bar['foo'];
+            TARGET(bar['foo']);
         `;
 
         assertReferences(code, 'bar', 'foo');
@@ -79,7 +79,7 @@ describe('namespace, memberexpression at use site', () => {
         const code = `
             import * as bar from 'bar';
 
-            bar.baz;
+            TARGET(bar.baz);
         `;
 
         assertNotReferences(code, 'bar', 'foo');
@@ -89,7 +89,7 @@ describe('namespace, memberexpression at use site', () => {
         const code = `
             import * as bar from 'bar';
 
-            bar[foo];
+            TARGET(bar[foo]);
         `;
 
         assertNotReferences(code, 'bar', 'foo');
@@ -101,7 +101,7 @@ describe('namespace, when checking for namespace', () => {
         const code = `
             import * as foo from 'bar';
 
-            foo;
+            TARGET(foo);
         `;
 
         assertReferences(code, 'bar', '*');

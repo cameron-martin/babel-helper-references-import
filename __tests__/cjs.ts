@@ -5,7 +5,7 @@ describe('destructuring', () => {
         const code = `
             const { foo } = require('bar');
 
-            foo;
+            TARGET(foo);
         `;
 
         assertReferences(code, 'bar', 'foo');
@@ -15,7 +15,7 @@ describe('destructuring', () => {
         const code = `
             const { foo: baz } = require('bar');
 
-            baz;
+            TARGET(baz);
         `;
 
         assertReferences(code, 'bar', 'foo');
@@ -25,7 +25,7 @@ describe('destructuring', () => {
         const code = `
             const { foo: baz } = require('wrong-package');
 
-            baz;
+            TARGET(baz);
         `;
 
         assertNotReferences(code, 'bar', 'foo');
@@ -35,7 +35,7 @@ describe('destructuring', () => {
         const code = `
             const { foo } = 1;
 
-            foo;
+            TARGET(foo);
         `;
 
         assertNotReferences(code, 'bar', 'foo');
@@ -48,7 +48,7 @@ describe('destructuring', () => {
 
             foo = 1;
 
-            foo;
+            TARGET(foo);
         `;
 
         assertNotReferences(code, 'package', 'foo');
@@ -60,7 +60,7 @@ describe('memberexpression at use site', () => {
         const code = `
             const bar = require('package');
 
-            bar.importName;
+            TARGET(bar.importName);
         `;
 
         assertReferences(code, 'package', 'importName');
@@ -70,7 +70,7 @@ describe('memberexpression at use site', () => {
         const code = `
             const bar = require('package');
 
-            bar['importName'];
+            TARGET(bar['importName']);
         `;
 
         assertReferences(code, 'package', 'importName');
@@ -80,7 +80,7 @@ describe('memberexpression at use site', () => {
         const code = `
             const bar = 1;
 
-            bar['importName'];
+            TARGET(bar['importName']);
         `;
 
         assertNotReferences(code, 'package', 'importName');
@@ -90,7 +90,7 @@ describe('memberexpression at use site', () => {
         const code = `
             const bar = require('other-package');
 
-            bar['importName'];
+            TARGET(bar['importName']);
         `;
 
         assertNotReferences(code, 'package', 'importName');
@@ -100,7 +100,7 @@ describe('memberexpression at use site', () => {
         const code = `
             const bar = require('package');
 
-            bar['otherImport'];
+            TARGET(bar['otherImport']);
         `;
 
         assertNotReferences(code, 'package', 'importName');
@@ -113,7 +113,7 @@ describe('memberexpression at use site', () => {
 
             bar = 1;
 
-            bar.importName;
+            TARGET(bar.importName);
         `;
 
         assertNotReferences(code, 'package', 'importName');
@@ -125,7 +125,7 @@ describe('namespace import', () => {
         const code = `
             const foo = require('package');
 
-            foo;
+            TARGET(foo);
         `;
 
         assertReferences(code, 'package', '*');
@@ -135,7 +135,7 @@ describe('namespace import', () => {
         const code = `
             const foo = require('package');
 
-            foo.foo;
+            TARGET(foo.foo);
         `;
 
         assertNotReferences(code, 'package', '*');
