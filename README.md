@@ -1,5 +1,7 @@
 # babel-helper-references-import
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/cameron-martin/babel-helper-references-import.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/cameron-martin/babel-helper-references-import.svg?branch=master)](https://travis-ci.org/cameron-martin/babel-helper-references-import)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
 [![dependencies Status](https://david-dm.org/cameron-martin/babel-helper-references-import/status.svg)](https://david-dm.org/cameron-martin/babel-helper-references-import)
