@@ -1,6 +1,7 @@
 import { NodePath } from 'babel-traverse';
 import * as t from 'babel-types';
 import { isDestructuringRequire, isCommonjsNamespaceImport } from './commonjs';
+import { isAmdNamespaceImport } from './amd';
 
 export function referencesImport(path: NodePath, packageName: string, importName: string): boolean {
     // Most es6 imports
@@ -14,6 +15,7 @@ export function referencesImport(path: NodePath, packageName: string, importName
 
     if(isDestructuringRequire(path, packageName, importName)) return true;
     if(importName === '*' && isCommonjsNamespaceImport(path, packageName)) return true;
+    if(importName === '*' && isAmdNamespaceImport(path, packageName)) return true;
 
     return false;
 }
