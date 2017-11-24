@@ -4,6 +4,8 @@
 
 # babel-helper-references-import
 
+[![Join the chat at https://gitter.im/cameron-martin/babel-helper-references-import](https://badges.gitter.im/cameron-martin/babel-helper-references-import.svg)](https://gitter.im/cameron-martin/babel-helper-references-import?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Checks whether an `Identifier` or `MemberExpression` references a specific import from a specific package.
 
 Like [`referencesImport`][referencesImport], but works with ES2015, CommonJS and AMD syntax.
