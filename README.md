@@ -20,3 +20,8 @@ This package contains a single named export:
 * `path` is a path to the node that you want to test whether it references an import from a package.
 * `packageName` is the name of the package.
 * `importName` is the name of the import. It can take a special value, `*`, to indicate that you want to test that the whole namespace is imported, for example when testing that `foo` references `import * as foo from 'package';` or `const foo = require('package');`
+
+## TODO
+
+* Dynamic imports
+* Consider when errors should be thrown rather than just not matching.
