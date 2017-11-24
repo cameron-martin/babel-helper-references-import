@@ -4,6 +4,9 @@
   "description": "Helper for rewriting imports from a particular library.",
   "main": "dist/cjs/index.js",
   "module": "dist/module/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "build": "npm run build:cjs && npm run build:module",

@@ -1,11 +1,20 @@
 language: node_js
 node_js:
-  - "4"
-  - "5"
-  - "6"
-  - "7"
-  - "8"
-  - "9"
+- '4'
+- '5'
+- '6'
+- '7'
+- '8'
+- '9'
 script:
-  - npm run build
-  - npm test
+- npm run build
+- npm test
+deploy:
+  provider: npm
+  email: cameronmartin123@gmail.com
+  api_key:
+    secure: nLtXvGhIaYiqyoCvi6Zd+SHVYLkKJmS1VNVtHROwCUxOoT9gxXj6tI/r5HTyyA9APSxZju4RbgNM325tlF0rTOiHpvKh1aL+ypjXxKw3ow4BUUwCo3Gdi54IkvAG/vWCeNKcAhYHUZNqg4vuqsI08nozfWMLm6j0dqFLOX0+a/GyX9qJkMKcnEUjlareFmJJ/x8R1nQjzmR2IZiBjqt281IbkY4wBhn8cGyivfquSS7c09TZV7iCjW423GKentT2FnynpquRXbrsMRVNUKsU20usmtfLPgVOyZjGtjR20iy9TUeyIB4KovWlQ5clfqtmjqlh3YTpLgyXSCr7LYsv/JW/oNyFRrPxHzEGulb3+3E/83q0ALJZvBTzYWMw50buNukJUNg7lG0ksQicrR5i/baYtP0ayeeZyC4z8rGdSTh9N0JNWBwO+0mH+20tpSN9BDO3VYQnLyH/0PujykPV86x1sD7TJAFMWez9YvBY0HrpY9N63dGQrlEngfBBEZgdd3hvJa6aBveV5iP7Qji2lKXJBSoCLmB5gMCYAc7CWmmdsHHtGVArfV//UWtiHI/WQ6Nk9p02NBW/6caZJdFfpWnb/798FTaYoqimLFYB6ikm6E54wKjPva3nE5Ecf3gMH+F2Wp7eG6iL5ZQx3x6WF0a296iIvDtS3aiXMDXz6Bs=
+  on:
+    tags: true
+    repo: cameron-martin/babel-helper-references-import
+  skip_cleanup: true
