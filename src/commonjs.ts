@@ -38,14 +38,9 @@ export function isDestructuringRequire(path: NodePath, packageName: string, impo
     const id = binding.path.get('id');
     if(!id.isObjectPattern()) return false;
 
-    const propertyIndex = id.node.properties.findIndex(property => t.isObjectProperty(property) && property.value === bindingIdentifier);
+    const property = id.node.properties.find(property => t.isObjectProperty(property) && property.value === bindingIdentifier);
 
-    if(propertyIndex === -1) return false;
-
-    const property = id.get(`properties.${propertyIndex}`) as NodePath<t.AssignmentProperty>;
-    const key = property.get('key');
-
-    return key.isIdentifier({ name: importName });
+    return property && t.isIdentifier(property.key, { name: importName });
 }
 
 function isRequire(path: NodePath, packageName: string) {
