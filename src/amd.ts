@@ -31,7 +31,5 @@ export function isAmdNamespaceImport(path: NodePath, packageName: string) {
 
     const dependencyName = dependencyNames.get(`elements.${dependencyIndex}`);
 
-    if(!dependencyName.isStringLiteral()) return false;
-
-    return dependencyName.node.value === packageName;
+    return dependencyName.isStringLiteral({ value: packageName });
 }

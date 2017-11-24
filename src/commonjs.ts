@@ -45,22 +45,17 @@ export function isDestructuringRequire(path: NodePath, packageName: string, impo
     const property = id.get(`properties.${propertyIndex}`) as NodePath<t.AssignmentProperty>;
     const key = property.get('key');
 
-    if(!key.isIdentifier() || key.node.name !== importName) return false;
-
-    return true;
+    return key.isIdentifier({ name: importName });
 }
 
 function isRequire(path: NodePath, packageName: string) {
     if(!path.isCallExpression()) return false;
 
     const callee = path.get('callee');
-    if(!callee.isIdentifier()) return false;
-    if(callee.node.name !== 'require') return false;
+    if(!callee.isIdentifier({ name: 'require' })) return false;
 
     if(path.node.arguments.length !== 1) return false;
     const argument = path.get('arguments.0');
-    if(!argument.isStringLiteral()) return false;
-    if(argument.node.value !== packageName) return false;
 
-    return true;
+    return argument.isStringLiteral({ value: packageName });
 }
