@@ -37,16 +37,17 @@
     ]
   },
   "devDependencies": {
-    "@types/babel-traverse": "^6.25.2",
     "@types/babylon": "^6.16.2",
     "@types/jest": "^21.1.7",
-    "babel-traverse": "^6.26.0",
     "babylon": "^6.18.0",
     "jest": "^21.2.1",
     "ts-jest": "^21.2.3",
     "typescript": "^2.6.1"
   },
   "dependencies": {
+    "@types/babel-traverse": "^6.25.2",
+    "@types/babel-types": "^6.25.1",
+    "babel-traverse": "^6.26.0",
     "babel-types": "^6.26.0"
   }
 }
