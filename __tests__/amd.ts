@@ -32,7 +32,7 @@ describe('namespace import', () => {
     });
 });
 
-describe('named import', () => {
+describe('named import using memberexpression', () => {
     test('correct with id and standard factory', () => {
         const code = `
             define('foo', ['require', 'package'], function(require, pkg) {
@@ -61,5 +61,26 @@ describe('named import', () => {
         `;
 
         assertNotReferences(code, 'package', '*');
+    });
+});
+
+describe('named import using destructuring', () => {
+    test('simple', () => {
+        const code = `
+            define(['package'], function({ importName }) {
+                TARGET(importName);
+            });
+        `;
+
+        assertReferences(code, 'package', 'importName');
+    });
+    test('renaming', () => {
+        const code = `
+            define(['package'], function({ importName: foo }) {
+                TARGET(foo);
+            });
+        `;
+
+        assertReferences(code, 'package', 'importName');
     });
 });

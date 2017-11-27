@@ -1,22 +1,40 @@
 import { NodePath } from 'babel-traverse';
 import * as t from 'babel-types';
+import { isDestructuringOf } from './shared';
 
 export function isAmdNamespaceImport(path: NodePath, packageName: string) {
     if(!path.isReferencedIdentifier()) return false;
 
     const binding = path.scope.getBinding(path.node.name);
 
+    if(!binding || !binding.path.isIdentifier()) return false;
+
+    return isAmdParamForPackage(binding.path, packageName);
+}
+
+export function isAmdDestructuring(path: NodePath, packageName: string, importName: string) {
+    if(!path.isReferencedIdentifier()) return false;
+
+    const binding = path.scope.getBinding(path.node.name);
+
     if(!binding) return false;
-    if(!binding.path.isIdentifier()) return false;
+    if(!isDestructuringOf(binding.path, binding.identifier, importName)) return false;
 
-    if(!binding.path.parentPath.isFunctionExpression() || binding.path.listKey !== 'params') return false;
+    return isAmdParamForPackage(binding.path, packageName);
+}
 
-    const factory = binding.path.parentPath;
+/**
+ * Is paramPath the parameter of an amd factory for a specific package?
+ */
+function isAmdParamForPackage(paramPath: NodePath, packageName: string) {
+    if(!paramPath.parentPath.isFunctionExpression() || paramPath.listKey !== 'params') return false;
+
+    const factory = paramPath.parentPath;
 
     if(!factory.parentPath.isCallExpression() || factory.listKey !== 'arguments') return false;
 
     const defineExpression = factory.parentPath;
-    const dependencyIndex = binding.path.key;
+    const dependencyIndex = paramPath.key;
 
     let dependencyNames: NodePath;
     if(defineExpression.node.arguments.length === 2) {
