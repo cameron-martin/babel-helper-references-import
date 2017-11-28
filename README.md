@@ -11,6 +11,16 @@ Like [`referencesImport`][referencesImport], but works with ES2015, CommonJS and
 
 [referencesImport]: https://github.com/babel/babel/blob/a1c7449a9276987ead4788c4333190c922ba0658/packages/babel-traverse/src/path/introspection.js#L160
 
+## Install
+
+```
+npm install --save babel-helper-references-import
+```
+
+```
+yarn add babel-helper-references-import
+```
+
 ## API
 
 This package contains a single named export:
