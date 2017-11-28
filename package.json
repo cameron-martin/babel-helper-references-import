@@ -45,8 +45,8 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
-    "@types/babel-traverse": "^6.25.2",
-    "@types/babel-types": "^6.25.1",
+    "@types/babel-traverse": "^6.25.3",
+    "@types/babel-types": "^6.25.2",
     "babel-traverse": "^6.26.0",
     "babel-types": "^6.26.0"
   }
